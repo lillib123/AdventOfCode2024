@@ -1,6 +1,7 @@
-const fs = require('fs');
+import {FileHelper} from '../fileHelper.js';
+const fileHelper = new FileHelper();
 
-const rawInput = readFile('./12-2/input.txt');
+const rawInput = fileHelper.readFile('./12-2/input.txt');
 const reports = rawInput.split('\n');
 let safeCount = 0;
 let safeCountFixed = 0;
@@ -58,14 +59,3 @@ console.log('Part 2: ' + (safeCount + safeCountFixed));
 
     return true;
   }
-
-  function readFile(filePath) {
-    try {
-      const data = fs.readFileSync(filePath);
-      return data.toString();
-    } catch (error) {
-      console.error(`Got an error trying to read the file: ${error.message}`);
-    }
-  }
-
-  //290

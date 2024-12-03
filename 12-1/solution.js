@@ -1,14 +1,15 @@
-const fs = require('fs');
+import {FileHelper} from '../fileHelper.js';
+const fileHelper = new FileHelper();
 
-const rawInput = readFile('./12-1/input.txt');
+const rawInput = fileHelper.readFile('./12-1/input.txt');
 const lessRawInput = rawInput.split('\n');
 const leftList = [];
 const rightList = [];
 
 lessRawInput.forEach(line => {
-    numbers = line.split(/\s+/);
-    leftNumber = numbers[0];
-    rightNumber = numbers[1];
+    let numbers = line.split(/\s+/);
+    let leftNumber = numbers[0];
+    let rightNumber = numbers[1];
 
     leftList.push(leftNumber);
     rightList.push(rightNumber);
@@ -28,12 +29,3 @@ for (let i=0; i<sortedLeft.length; i++) {
 
 console.log('Part 1: ' + sum);
 console.log('Part 2: ' + newSum);
-
-function readFile(filePath) {
-    try {
-      const data = fs.readFileSync(filePath);
-      return data.toString();
-    } catch (error) {
-      console.error(`Got an error trying to read the file: ${error.message}`);
-    }
-  }

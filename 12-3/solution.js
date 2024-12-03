@@ -1,6 +1,7 @@
-const fs = require('fs');
+import {FileHelper} from '../fileHelper.js';
+const fileHelper = new FileHelper();
 
-const rawInput = readFile('./12-3/input.txt');
+const rawInput = fileHelper.readFile('./12-3/input.txt');
 const muls = rawInput.match(/(mul\(\d{1,3},\d{1,3}\))|(do\(\))|(don't\(\))/g);
 
 let sum = 0;
@@ -19,12 +20,3 @@ muls.forEach(mul => {
 });
 
 console.log(sum);
-
-function readFile(filePath) {
-    try {
-      const data = fs.readFileSync(filePath);
-      return data.toString();
-    } catch (error) {
-      console.error(`Got an error trying to read the file: ${error.message}`);
-    }
-  }
