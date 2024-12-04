@@ -1,12 +1,12 @@
 import { FileHelper } from '../fileHelper.js';
-const fileHelper = new FileHelper();
 
+const fileHelper = new FileHelper();
 const rawInput = fileHelper.readFile('./12-4/input.txt');
 const lines = rawInput.split('\n');
 let count = 0;
 let xCount = 0;
-const part1String = 'MAS';
 const directions = [[0,1],[0,-1],[1,0],[-1,0],[-1,1],[-1,-1],[1,1],[1,-1]];
+const cornerDirections = [['M', 'M', 'S', 'S'],['S', 'M', 'S', 'M'],['S', 'S', 'M', 'M'],['M', 'S', 'M', 'S']];
 
 lines.forEach((line, y) => {
     line = line.trim().split('');
@@ -14,13 +14,12 @@ lines.forEach((line, y) => {
     line.forEach((char, x) => {
         if (char === 'X') {
             directions.forEach(direction => {
-                if (checkSpace(part1String, lines, y, x, direction[0], direction[1])) count++;
+                if (checkSpace('MAS', lines, y, x, direction[0], direction[1])) count++;
             });
         } else if (char === 'A') {
-            if (checkCorners(['M', 'M', 'S', 'S'], lines, y, x)) xCount++;
-            if (checkCorners(['S', 'M', 'S', 'M'], lines, y, x)) xCount++;
-            if (checkCorners(['S', 'S', 'M', 'M'], lines, y, x)) xCount++;
-            if (checkCorners(['M', 'S', 'M', 'S'], lines, y, x)) xCount++;
+            cornerDirections.forEach(direction => {
+                if (checkCorners(direction, lines, y, x)) xCount++;
+            });
         }
     });
 });
