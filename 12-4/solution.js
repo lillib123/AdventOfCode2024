@@ -6,7 +6,7 @@ const lines = rawInput.split('\n');
 let count = 0;
 let xCount = 0;
 const part1String = 'MAS';
-const directions = [[1,0],[-1,0],[0,1],[0,-1],[1,-1],[-1,-1],[1,1],[-1,1]];
+const directions = [[0,1],[0,-1],[1,0],[-1,0],[-1,1],[-1,-1],[1,1],[1,-1]];
 
 lines.forEach((line, y) => {
     line = line.trim().split('');
@@ -29,11 +29,10 @@ console.log('Part 1: ' + count);
 console.log('Part 2: ' + xCount)
 
 function checkCorners(characters, lines, y, x) {
-    characters = ['M', 'M', 'S', 'S'];
-    return checkSpace(characters[0], lines, y, x, -1, -1) && checkSpace(characters[1], lines, y, x, 1, -1) && checkSpace(characters[2], lines, y, x, -1, 1) && checkSpace(characters[3], lines, y, x, 1, 1);
+    return checkSpace(characters[0], lines, y, x, -1, -1) && checkSpace(characters[1], lines, y, x, -1, 1) && checkSpace(characters[2], lines, y, x, 1, -1) && checkSpace(characters[3], lines, y, x, 1, 1);
 }
 
-function checkSpace(string, lines, y, x, xDirection, yDirection) {
+function checkSpace(string, lines, y, x, yDirection, xDirection) {
     for (let i=1; i<=string.length; i++) {
         let nextCharacter = string.charAt(i-1);
         let isXOutOfBounds = x+(xDirection*(i)) < 0 || x+(xDirection*(i)) > lines[y].length-1;
